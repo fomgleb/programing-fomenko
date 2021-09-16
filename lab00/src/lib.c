@@ -25,6 +25,9 @@ const char *get_animal_type_name(enum animal_type type)
 	case PIG:
 		result = "Свиня";
 		break;
+	case COCKROACH:
+		result = "Общажный таракан";
+		break;
 	default:
 		result = "N/A";
 	}

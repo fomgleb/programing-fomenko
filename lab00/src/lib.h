@@ -19,7 +19,7 @@
 /**
  * Кількість тварин у масиві
  */
-#define ANIMAL_COUNT 10
+#define ANIMAL_COUNT 15
 
 /**
  * Тип тварини
@@ -29,6 +29,7 @@ enum animal_type {
 	COW, /**< Корова */
 	DOG, /**< Собака */
 	CAT, /**< Кіт */
+	COCKROACH, /**< Таракан */
 	ANIMAL_TYPE_COUNT /**< Кількість тварин */
 };
 
