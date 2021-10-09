@@ -1,0 +1,62 @@
+<?xml version="1.0"?>
+<dumps>
+  <platform name="Native" char_bit="8" short_bit="16" int_bit="32" long_bit="64" long_long_bit="64" pointer_bit="64"/>
+  <rawtokens>
+    <file index="0" name="src/main.c"/>
+    <tok fileIndex="0" linenr="1" column="1" str="/*x * Calculate the sum of numbers in a given rangex *x * input data:x * x- firstNumOfRange, intx * x- lastNumOfRange, intx *x * output data:x * x- sumOfEachNumOfRange, intx *x*/"/>
+    <tok fileIndex="0" linenr="13" column="1" str="int"/>
+    <tok fileIndex="0" linenr="13" column="5" str="main"/>
+    <tok fileIndex="0" linenr="13" column="9" str="("/>
+    <tok fileIndex="0" linenr="13" column="10" str=")"/>
+    <tok fileIndex="0" linenr="13" column="12" str="// xxxx xxxxxxxxxx xxxxxxxxxx"/>
+    <tok fileIndex="0" linenr="14" column="1" str="{"/>
+    <tok fileIndex="0" linenr="15" column="2" str="int"/>
+    <tok fileIndex="0" linenr="15" column="6" str="firstNumOfRange"/>
+    <tok fileIndex="0" linenr="15" column="22" str="="/>
+    <tok fileIndex="0" linenr="15" column="24" str="2"/>
+    <tok fileIndex="0" linenr="15" column="25" str=";"/>
+    <tok fileIndex="0" linenr="15" column="27" str="// xxxxxxxxxxxxxxxxxxxxxx xxxxxxxxxxxx, xxxxxxxxxx xxxxxx xxxxxxxxxx xxxxxxxx xxxxxxxxxxxxxxxxxxxx xxxxxxxxxxxxxxxxxxxx"/>
+    <tok fileIndex="0" linenr="16" column="2" str="int"/>
+    <tok fileIndex="0" linenr="16" column="6" str="lastNumOfRange"/>
+    <tok fileIndex="0" linenr="16" column="21" str="="/>
+    <tok fileIndex="0" linenr="16" column="23" str="4"/>
+    <tok fileIndex="0" linenr="16" column="24" str=";"/>
+    <tok fileIndex="0" linenr="16" column="26" str="// xxxxxxxxxxxxxxxxxxxxxx xxxxxxxxxxxx, xxxxxxxxxx xxxx xxxxxxxxxx xxxxxxxx xxxxxxxxxxxxxxxxxxxx"/>
+    <tok fileIndex="0" linenr="17" column="2" str="int"/>
+    <tok fileIndex="0" linenr="17" column="6" str="sumOfEachNumOfRange"/>
+    <tok fileIndex="0" linenr="17" column="26" str="="/>
+    <tok fileIndex="0" linenr="17" column="28" str="0"/>
+    <tok fileIndex="0" linenr="17" column="29" str=";"/>
+    <tok fileIndex="0" linenr="17" column="31" str="// xxxxxxxxxxxxxxxxxxxxxx xxxxxxxxxxxx, xxxxxxxxxx, xxxxxxxxxx xxxxxxxx xxxxxxxxxx xxxxxx firstNum xxxx SecondNum"/>
+    <tok fileIndex="0" linenr="19" column="2" str="// xx xxxxxxxxxx xxxxxxxxxx xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx xxxxxxxxxxxx &lt;i&gt;; xxxxxx xxxxxxxx xxxxxxxx xxxxxxxxxxxxxxxxxxxxxxxx xxxxxxxx &lt;i&gt; xxxx xxxxxxxx xxxxxxxxxx xxxxxx xxxxxxxxxxxxxxxxxxxxxx xxxxxxxxxxxxxx secondNum; xxxxxxxxxx xxxxxxxxxxxxxxxx xxxxxxxxxxxx &lt;i&gt; xxxxxxxx xxxxxxxxxxxxxxxxxxxxxxxxxx xxxx &lt;i&gt;."/>
+    <tok fileIndex="0" linenr="20" column="2" str="for"/>
+    <tok fileIndex="0" linenr="20" column="6" str="("/>
+    <tok fileIndex="0" linenr="20" column="7" str="int"/>
+    <tok fileIndex="0" linenr="20" column="11" str="i"/>
+    <tok fileIndex="0" linenr="20" column="13" str="="/>
+    <tok fileIndex="0" linenr="20" column="15" str="firstNumOfRange"/>
+    <tok fileIndex="0" linenr="20" column="30" str=";"/>
+    <tok fileIndex="0" linenr="20" column="32" str="i"/>
+    <tok fileIndex="0" linenr="20" column="34" str="&lt;="/>
+    <tok fileIndex="0" linenr="20" column="37" str="lastNumOfRange"/>
+    <tok fileIndex="0" linenr="20" column="51" str=";"/>
+    <tok fileIndex="0" linenr="20" column="53" str="i"/>
+    <tok fileIndex="0" linenr="20" column="54" str="++"/>
+    <tok fileIndex="0" linenr="20" column="56" str=")"/>
+    <tok fileIndex="0" linenr="20" column="58" str="{"/>
+    <tok fileIndex="0" linenr="21" column="3" str="sumOfEachNumOfRange"/>
+    <tok fileIndex="0" linenr="21" column="23" str="+="/>
+    <tok fileIndex="0" linenr="21" column="26" str="i"/>
+    <tok fileIndex="0" linenr="21" column="27" str=";"/>
+    <tok fileIndex="0" linenr="21" column="29" str="// xxxxxxxxxx xxxxxxxxxxxxxxxx xxxx xxxxxxxxxxxxxx rangeOfNums xxxxxxxx xxxxxxxxxxxxxxxxxxxx &lt;i&gt;"/>
+    <tok fileIndex="0" linenr="22" column="2" str="}"/>
+    <tok fileIndex="0" linenr="24" column="2" str="return"/>
+    <tok fileIndex="0" linenr="24" column="9" str="0"/>
+    <tok fileIndex="0" linenr="24" column="10" str=";"/>
+    <tok fileIndex="0" linenr="25" column="1" str="}"/>
+  </rawtokens>
+  <suppressions>
+    <suppression errorId="unreadVariable" fileName="*/main.c" />
+    <suppression errorId="knownConditionTrueFalse" fileName="*/main.c" />
+    <suppression errorId="unmatchedSuppression" fileName="*/main.c" />
+  </suppressions>
