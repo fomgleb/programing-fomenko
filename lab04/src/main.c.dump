@@ -1,0 +1,164 @@
+<?xml version="1.0"?>
+<dumps>
+  <platform name="Native" char_bit="8" short_bit="16" int_bit="32" long_bit="64" long_long_bit="64" pointer_bit="64"/>
+  <rawtokens>
+    <file index="0" name="src/main.c"/>
+    <tok fileIndex="0" linenr="1" column="1" str="/*x * Calculate some value depending on user command.x * Formula of circumference: 2 * PI * radiusx * Formula of square: PI * radius * radiusx * Formula of volume: (4/3) * PI * radius * radius * radiusx *x * input data:x * x- PI, constantx * x- radius, unsigned floatx * x- command, charx *x * output data:x * xresult =x *xx- if command was 'l': calculate circumference, unsigned floatx *xx- if command was 's': calculate square, unsigned floatx *xx- if command was 'v': calculate volume, unsigned floatx */"/>
+    <tok fileIndex="0" linenr="19" column="1" str="#"/>
+    <tok fileIndex="0" linenr="19" column="2" str="include"/>
+    <tok fileIndex="0" linenr="19" column="10" str="&lt;stdio.h&gt;"/>
+    <tok fileIndex="0" linenr="20" column="1" str="int"/>
+    <tok fileIndex="0" linenr="20" column="5" str="main"/>
+    <tok fileIndex="0" linenr="20" column="9" str="("/>
+    <tok fileIndex="0" linenr="20" column="10" str=")"/>
+    <tok fileIndex="0" linenr="21" column="1" str="{"/>
+    <tok fileIndex="0" linenr="22" column="1" str="// input data"/>
+    <tok fileIndex="0" linenr="23" column="1" str="#"/>
+    <tok fileIndex="0" linenr="23" column="2" str="define"/>
+    <tok fileIndex="0" linenr="23" column="9" str="PI"/>
+    <tok fileIndex="0" linenr="23" column="13" str="3.14f"/>
+    <tok fileIndex="0" linenr="23" column="18" str="// xxxxxxxxxx xxxx"/>
+    <tok fileIndex="0" linenr="24" column="2" str="float"/>
+    <tok fileIndex="0" linenr="24" column="8" str="radius"/>
+    <tok fileIndex="0" linenr="24" column="14" str=";"/>
+    <tok fileIndex="0" linenr="24" column="16" str="// xxxxxxxxxxxx xx xxxxxxxxxxxxxxxxxx xxxxxxxxxx"/>
+    <tok fileIndex="0" linenr="25" column="2" str="char"/>
+    <tok fileIndex="0" linenr="25" column="7" str="command"/>
+    <tok fileIndex="0" linenr="25" column="15" str="="/>
+    <tok fileIndex="0" linenr="25" column="17" str="' '"/>
+    <tok fileIndex="0" linenr="25" column="20" str=";"/>
+    <tok fileIndex="0" linenr="25" column="22" str="// xxxxxxxxxxxxxx xxxxxx xxxxxxxxxx xxxxxxxxxxxxxxxxxxxx"/>
+    <tok fileIndex="0" linenr="26" column="2" str="// output data"/>
+    <tok fileIndex="0" linenr="27" column="2" str="float"/>
+    <tok fileIndex="0" linenr="27" column="8" str="result"/>
+    <tok fileIndex="0" linenr="27" column="14" str=";"/>
+    <tok fileIndex="0" linenr="27" column="16" str="// xxxxxxxxxxxxxxxxxx xxxxxxxxxxxxxxxxxx xxxxxxxxxxxx xxxxxxxxxxxxxx"/>
+    <tok fileIndex="0" linenr="29" column="2" str="while"/>
+    <tok fileIndex="0" linenr="29" column="8" str="("/>
+    <tok fileIndex="0" linenr="29" column="9" str="command"/>
+    <tok fileIndex="0" linenr="29" column="17" str="!="/>
+    <tok fileIndex="0" linenr="29" column="20" str="'q'"/>
+    <tok fileIndex="0" linenr="29" column="23" str=")"/>
+    <tok fileIndex="0" linenr="29" column="25" str="{"/>
+    <tok fileIndex="0" linenr="29" column="27" str="// xxxxxxxx command xxxx xxxxxxxxxxxxxxxx 'q' xxxxxxxxxxxxxxxxxx xxxxxx xxxxxxxxxx xxxxxxxx"/>
+    <tok fileIndex="0" linenr="30" column="3" str="printf"/>
+    <tok fileIndex="0" linenr="30" column="9" str="("/>
+    <tok fileIndex="0" linenr="30" column="10" str="&quot;\nEnter the radius of circle/sphere: &quot;"/>
+    <tok fileIndex="0" linenr="30" column="49" str=")"/>
+    <tok fileIndex="0" linenr="30" column="50" str=";"/>
+    <tok fileIndex="0" linenr="31" column="3" str="scanf"/>
+    <tok fileIndex="0" linenr="31" column="8" str="("/>
+    <tok fileIndex="0" linenr="31" column="9" str="&quot;%f&quot;"/>
+    <tok fileIndex="0" linenr="31" column="13" str=","/>
+    <tok fileIndex="0" linenr="31" column="15" str="&amp;"/>
+    <tok fileIndex="0" linenr="31" column="16" str="radius"/>
+    <tok fileIndex="0" linenr="31" column="22" str=")"/>
+    <tok fileIndex="0" linenr="31" column="23" str=";"/>
+    <tok fileIndex="0" linenr="32" column="3" str="printf"/>
+    <tok fileIndex="0" linenr="32" column="9" str="("/>
+    <tok fileIndex="0" linenr="32" column="10" str="&quot;Enter what to do with this radius ('l' - lenght of a circumference, 's' - square of a circle, 'v' - volume of a sphere, 'q' - quit): &quot;"/>
+    <tok fileIndex="0" linenr="32" column="145" str=")"/>
+    <tok fileIndex="0" linenr="32" column="146" str=";"/>
+    <tok fileIndex="0" linenr="33" column="3" str="scanf"/>
+    <tok fileIndex="0" linenr="33" column="8" str="("/>
+    <tok fileIndex="0" linenr="33" column="9" str="&quot;%s&quot;"/>
+    <tok fileIndex="0" linenr="33" column="13" str=","/>
+    <tok fileIndex="0" linenr="33" column="15" str="&amp;"/>
+    <tok fileIndex="0" linenr="33" column="16" str="command"/>
+    <tok fileIndex="0" linenr="33" column="23" str=")"/>
+    <tok fileIndex="0" linenr="33" column="24" str=";"/>
+    <tok fileIndex="0" linenr="35" column="3" str="switch"/>
+    <tok fileIndex="0" linenr="35" column="10" str="("/>
+    <tok fileIndex="0" linenr="35" column="11" str="command"/>
+    <tok fileIndex="0" linenr="35" column="18" str=")"/>
+    <tok fileIndex="0" linenr="35" column="20" str="{"/>
+    <tok fileIndex="0" linenr="35" column="22" str="// xxxxxxxxxxxxxxxx switch case xxxxxx xxxx xxxxxxxxxxxxxxxx xxxxxxxxxx"/>
+    <tok fileIndex="0" linenr="36" column="3" str="case"/>
+    <tok fileIndex="0" linenr="36" column="8" str="'l'"/>
+    <tok fileIndex="0" linenr="36" column="11" str=":"/>
+    <tok fileIndex="0" linenr="36" column="13" str="// if (command == 'l')"/>
+    <tok fileIndex="0" linenr="37" column="4" str="result"/>
+    <tok fileIndex="0" linenr="37" column="11" str="="/>
+    <tok fileIndex="0" linenr="37" column="13" str="2"/>
+    <tok fileIndex="0" linenr="37" column="15" str="*"/>
+    <tok fileIndex="0" linenr="37" column="17" str="PI"/>
+    <tok fileIndex="0" linenr="37" column="20" str="*"/>
+    <tok fileIndex="0" linenr="37" column="22" str="radius"/>
+    <tok fileIndex="0" linenr="37" column="28" str=";"/>
+    <tok fileIndex="0" linenr="38" column="4" str="printf"/>
+    <tok fileIndex="0" linenr="38" column="10" str="("/>
+    <tok fileIndex="0" linenr="38" column="11" str="&quot;Circumference equals %f\n&quot;"/>
+    <tok fileIndex="0" linenr="38" column="38" str=","/>
+    <tok fileIndex="0" linenr="38" column="40" str="result"/>
+    <tok fileIndex="0" linenr="38" column="46" str=")"/>
+    <tok fileIndex="0" linenr="38" column="47" str=";"/>
+    <tok fileIndex="0" linenr="39" column="4" str="break"/>
+    <tok fileIndex="0" linenr="39" column="9" str=";"/>
+    <tok fileIndex="0" linenr="40" column="3" str="case"/>
+    <tok fileIndex="0" linenr="40" column="8" str="'s'"/>
+    <tok fileIndex="0" linenr="40" column="11" str=":"/>
+    <tok fileIndex="0" linenr="40" column="13" str="// if (command == 's')"/>
+    <tok fileIndex="0" linenr="41" column="4" str="result"/>
+    <tok fileIndex="0" linenr="41" column="11" str="="/>
+    <tok fileIndex="0" linenr="41" column="13" str="PI"/>
+    <tok fileIndex="0" linenr="41" column="16" str="*"/>
+    <tok fileIndex="0" linenr="41" column="18" str="radius"/>
+    <tok fileIndex="0" linenr="41" column="25" str="*"/>
+    <tok fileIndex="0" linenr="41" column="27" str="radius"/>
+    <tok fileIndex="0" linenr="41" column="33" str=";"/>
+    <tok fileIndex="0" linenr="42" column="4" str="printf"/>
+    <tok fileIndex="0" linenr="42" column="10" str="("/>
+    <tok fileIndex="0" linenr="42" column="11" str="&quot;Square equals %f\n&quot;"/>
+    <tok fileIndex="0" linenr="42" column="31" str=","/>
+    <tok fileIndex="0" linenr="42" column="33" str="result"/>
+    <tok fileIndex="0" linenr="42" column="39" str=")"/>
+    <tok fileIndex="0" linenr="42" column="40" str=";"/>
+    <tok fileIndex="0" linenr="43" column="4" str="break"/>
+    <tok fileIndex="0" linenr="43" column="9" str=";"/>
+    <tok fileIndex="0" linenr="44" column="3" str="case"/>
+    <tok fileIndex="0" linenr="44" column="8" str="'v'"/>
+    <tok fileIndex="0" linenr="44" column="11" str=":"/>
+    <tok fileIndex="0" linenr="44" column="13" str="// if (command == 'v')"/>
+    <tok fileIndex="0" linenr="45" column="4" str="result"/>
+    <tok fileIndex="0" linenr="45" column="11" str="="/>
+    <tok fileIndex="0" linenr="45" column="13" str="("/>
+    <tok fileIndex="0" linenr="45" column="14" str="float"/>
+    <tok fileIndex="0" linenr="45" column="19" str=")"/>
+    <tok fileIndex="0" linenr="45" column="20" str="4"/>
+    <tok fileIndex="0" linenr="45" column="22" str="/"/>
+    <tok fileIndex="0" linenr="45" column="24" str="3"/>
+    <tok fileIndex="0" linenr="45" column="26" str="*"/>
+    <tok fileIndex="0" linenr="45" column="28" str="PI"/>
+    <tok fileIndex="0" linenr="45" column="31" str="*"/>
+    <tok fileIndex="0" linenr="45" column="33" str="radius"/>
+    <tok fileIndex="0" linenr="45" column="40" str="*"/>
+    <tok fileIndex="0" linenr="45" column="42" str="radius"/>
+    <tok fileIndex="0" linenr="45" column="49" str="*"/>
+    <tok fileIndex="0" linenr="45" column="51" str="radius"/>
+    <tok fileIndex="0" linenr="45" column="57" str=";"/>
+    <tok fileIndex="0" linenr="46" column="4" str="printf"/>
+    <tok fileIndex="0" linenr="46" column="10" str="("/>
+    <tok fileIndex="0" linenr="46" column="11" str="&quot;Volume equals %f\n&quot;"/>
+    <tok fileIndex="0" linenr="46" column="31" str=","/>
+    <tok fileIndex="0" linenr="46" column="33" str="result"/>
+    <tok fileIndex="0" linenr="46" column="39" str=")"/>
+    <tok fileIndex="0" linenr="46" column="40" str=";"/>
+    <tok fileIndex="0" linenr="47" column="4" str="break"/>
+    <tok fileIndex="0" linenr="47" column="9" str=";"/>
+    <tok fileIndex="0" linenr="48" column="3" str="default"/>
+    <tok fileIndex="0" linenr="48" column="10" str=":"/>
+    <tok fileIndex="0" linenr="48" column="12" str="// else"/>
+    <tok fileIndex="0" linenr="49" column="4" str="break"/>
+    <tok fileIndex="0" linenr="49" column="9" str=";"/>
+    <tok fileIndex="0" linenr="50" column="3" str="}"/>
+    <tok fileIndex="0" linenr="51" column="2" str="}"/>
+    <tok fileIndex="0" linenr="53" column="2" str="return"/>
+    <tok fileIndex="0" linenr="53" column="9" str="0"/>
+    <tok fileIndex="0" linenr="53" column="10" str=";"/>
+    <tok fileIndex="0" linenr="54" column="1" str="}"/>
+  </rawtokens>
+  <suppressions>
+    <suppression errorId="unreadVariable" fileName="*/main.c" />
+    <suppression errorId="knownConditionTrueFalse" fileName="*/main.c" />
+    <suppression errorId="unmatchedSuppression" fileName="*/main.c" />
+  </suppressions>
