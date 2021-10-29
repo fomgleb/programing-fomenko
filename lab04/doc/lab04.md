@@ -15,7 +15,7 @@
 		    ├── main.c
 		    └── main.c.dump
 
-20. Я створив файл main.c, зайшов в ньго командою `vim src/main.c` та написав такий код:
+20) Я створив файл main.c, зайшов в ньго командою `vim src/main.c` та написав такий код:
 
 		/*
 		 * Сalculate some value depending on user command.
