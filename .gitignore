@@ -1,4 +1,4 @@
 dist/
 .idea
-.c.dump
+*.c.dump
 cmake-build-debug
