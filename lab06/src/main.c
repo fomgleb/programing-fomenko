@@ -7,112 +7,112 @@
 
 int main()
 {
-	#define RESULT_COUNT 100
-	#define FIGURES_COUNT 20
-	#define TENS_COUNT 10
-	#define STRING_SIZE 10
-	#define RESULTING_ARRAY_COUNT 8
-	
+#define RESULT_COUNT 100
+#define FIGURES_COUNT 20
+#define TENS_COUNT 10
+#define STRING_SIZE 10
+#define RESULTING_ARRAY_COUNT 8
+
 	// input
 	int number = 3562;
 
-	short thereIsMinus = number > 0 ? 0 : 1;
-	if (thereIsMinus == 1) {
+	short thereIsMinus = 0;
+	if (number > 0) { 
 		number *= -1;
+		thereIsMinus = 1;
 	}
 
 	int firstFigure = number / 1000;
 	int secondFigure = (number / 100) % 10;
 	int thirdFigure = (number / 10) % 10;
-	int fourthFigure = number % 10; 
+	int fourthFigure = number % 10;
 
-	char figures[FIGURES_COUNT][STRING_SIZE] = {"", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten", "eleven", "twelve", "thirteen", "fourteen", "fifteen", "sixteen", "seventeen", "eighteen", "nineteen"};
-	char tens[TENS_COUNT][STRING_SIZE] = {"", "ten", "twenty", "thirty", "fourty", "fifty", "sixty", "seventy", "eighty", "ninety"};
+	char figures[FIGURES_COUNT][STRING_SIZE] = { "",	 "one",	    "two",     "three",	    "four",	"five",	   "six",
+						     "seven",	 "eight",   "nine",    "ten",	    "eleven",	"twelve",  "thirteen",
+						     "fourteen", "fifteen", "sixteen", "seventeen", "eighteen", "nineteen" };
+	char tens[TENS_COUNT][STRING_SIZE] = { "", "ten", "twenty", "thirty", "fourty", "fifty", "sixty", "seventy", "eighty", "ninety" };
 	char thousand[9] = "thousand";
 	char hundred[7] = "hundred";
 	char and[3] = "and";
 	char minus[6] = "minus";
 
 	int filledCharsInResult = 0;
-	
-	char result[RESULTING_ARRAY_COUNT][STRING_SIZE] = {"","","","","","","",""};
+
+	char result[RESULTING_ARRAY_COUNT][STRING_SIZE] = { "", "", "", "", "", "", "", "" };
 	for (int i = 0; i < RESULTING_ARRAY_COUNT; i++) {
 		switch (i) {
-			// minus or zero
-			case 0:
-				if (firstFigure == 0 && secondFigure == 0 && thirdFigure == 0 && fourthFigure == 0) {
-					result[i][0] = '0';
-					break;
-				}
-				if (thereIsMinus == 1) {
-					for (int j = 0; j < (int)sizeof(minus); j++) {
-						result[i][j] = minus[j];
-					}
-				}
+		// minus or zero
+		case 0:
+			if (firstFigure == 0 && secondFigure == 0 && thirdFigure == 0 && fourthFigure == 0) {
+				result[i][0] = '0';
 				break;
-			// one, two, three... thousand
-			case 1:
-				if (firstFigure > 0) {
-					for (int j = 0; j < STRING_SIZE; j++) {
-						result[i][j] = figures[firstFigure][j];
-					}
-					i++;
-					for (int j = 0; j < (int)sizeof(thousand); j++) {
-						result[i][j] = thousand[j];
-					}
+			}
+			if (thereIsMinus == 1) {
+				for (int j = 0; j < (int)sizeof(minus); j++) {
+					result[i][j] = minus[j];
+				}
+			}
+			break;
+		// one, two, three... thousand
+		case 1:
+			if (firstFigure > 0) {
+				for (int j = 0; j < STRING_SIZE; j++) {
+					result[i][j] = figures[firstFigure][j];
+				}
+				i++;
+				for (int j = 0; j < (int)sizeof(thousand); j++) {
+					result[i][j] = thousand[j];
+				}
+			}
+			break;
+		// one, two, three... hundred
+		case 3:
+			if (secondFigure > 0) {
+				for (int j = 0; j < STRING_SIZE; j++) {
+					result[i][j] = figures[secondFigure][j];
+				}
+				i++;
+				for (int j = 0; j < (int)sizeof(hundred); j++) {
+					result[i][j] = hundred[j];
+				}
+			}
+			break;
+		// and
+		case 5:
+			if ((firstFigure != 0 || secondFigure != 0) && (thirdFigure != 0 || fourthFigure != 0)) {
+				for (int j = 0; j < (int)sizeof(and); j++) {
+					result[i][j] = and[j];
+				}
+			}
+			break;
+		// one, two, three... eleven, twelve... twenty one, thirty one
+		case 6:
+			if (thirdFigure == 1) {
+				for (int j = 0; j < STRING_SIZE; j++) {
+					result[i][j] = figures[thirdFigure * 10 + fourthFigure][j];
+				}
+				i++;
 
+			} else if (thirdFigure > 1) {
+				for (int j = 0; j < STRING_SIZE; j++) {
+					result[i][j] = tens[thirdFigure][j];
 				}
-				break;
-			// one, two, three... hundred
-			case 3:
-				if (secondFigure > 0) {
-					for (int j = 0; j < STRING_SIZE; j++) {
-						result[i][j] = figures[secondFigure][j];
-					}
-					i++;
-					for (int j = 0; j < (int)sizeof(hundred); j++) {
-						result[i][j] = hundred[j];
-					}
-
+				i++;
+				for (int j = 0; j < STRING_SIZE; j++) {
+					result[i][j] = figures[fourthFigure][j];
 				}
-				break;
-			// and
-			case 5:
-				if ((firstFigure != 0 || secondFigure != 0) && (thirdFigure != 0 || fourthFigure != 0)) {
-					for (int j = 0; j < (int)sizeof(and); j++) {
-						result[i][j] = and[j];
-					}
+			}
+			break;
+		// one, two, three
+		case 7:
+			if (fourthFigure > 0) {
+				for (int j = 0; j < (int)sizeof(figures)[0]; j++) {
+					result[i][j] = figures[fourthFigure][j];
 				}
-				break;
-			// one, two, three... eleven, twelve... twenty one, thirty one	
-			case 6:
-				if (thirdFigure == 1) {
-					for (int j = 0; j < STRING_SIZE; j++) {
-						result[i][j] = figures[thirdFigure * 10 + fourthFigure][j];
-					}
-					i++;
-
-				}
-				else if (thirdFigure > 1) {
-					for (int j = 0; j < STRING_SIZE; j++) {
-						result[i][j] = tens[thirdFigure][j];
-					}
-					i++;
-					for (int j = 0; j < STRING_SIZE; j++) {
-						result[i][j] = figures[fourthFigure][j];
-					}
-				}
-				break;
-			// one, two, three
-			case 7:
-				if (fourthFigure > 0) {
-					for (int j = 0; j < (int)sizeof(figures)[0]; j++) {
-						result[i][j] = figures[fourthFigure][j];
-					}
-				}
-				break;
-			default:
-				break;
+			}
+			break;
+		default:
+			break;
 		}
 	}
 
@@ -120,9 +120,11 @@ int main()
 	char printableResult[RESULT_COUNT];
 
 	int limitingChar;
-	for (int i = 0, k = 0; i < (int)sizeof(result)/(int)sizeof(result[0]); i++) {
+	for (int i = 0, k = 0; i < (int)sizeof(result) / (int)sizeof(result[0]); i++) {
 		for (int j = 0; j < STRING_SIZE; j++, k++) {
-			if (result[i][j] == '\0') {break;}
+			if (result[i][j] == '\0') {
+				break;
+			}
 			printableResult[k] = result[i][j];
 		}
 		if (result[i][0] != '\0') {
@@ -131,11 +133,15 @@ int main()
 		}
 		limitingChar = k;
 	}
-	printableResult[limitingChar] = '\0';	
+	printableResult[limitingChar] = '\0';
 
 	// Remove useless spaces
 	for (int i = 0, j = 0; i < RESULT_COUNT; i++) {
-		if (printableResult[i] == ' ' && ((printableResult[i+1] == ' ' || printableResult[i+1] == '\0')/* || (printableResult[i-1] == ' ' || printableResult[i-1] == '\0')*/)) {continue;}
+		if (printableResult[i] == ' ' &&
+		    ((printableResult[i + 1] == ' ' ||
+		      printableResult[i + 1] == '\0') /* || (printableResult[i-1] == ' ' || printableResult[i-1] == '\0')*/)) {
+			continue;
+		}
 		printableResult[j] = printableResult[i];
 		j++;
 	}
