@@ -237,7 +237,40 @@
 				j++;
 			}
 		}
-
 * Так як ми не вміємо використовувати вказівники в си, я винес printableResult за функцію main, тому що я не можу вернути массив.
+
+* Далі я вирішив виконати перше завдання складного рівня:
+
+		#include <stdarg.h>
+
+		int get_count_bigger_than_next_numbers(int count, ...);
+
+		int main()
+		{
+			int result = get_count_bigger_than_next_numbers(5, 2, 4, 5, 3, 2);
+
+			return 0;
+		}
+
+		int get_count_bigger_than_next_numbers(int count, ...)
+		{
+			va_list variables;
+			va_list variables_copy;
+			int counter = 0;
+
+			va_start(variables, count);
+			va_copy(variables_copy, variables);
+
+			va_arg(variables_copy, int);
+
+			for (int i = 0; i < count - 1; i++) {
+				if (va_arg(variables, int) > va_arg(variables_copy, int)) {
+					counter++;
+				}
+			}
+
+			return counter;
+		}
+* В завданні цьому написано що треба знайти кількість пар чисел перше якого менше наступного але в прикладі показано { 3, 2, 4, 3, 1} = 3. Але три виходить тільки якщо перше більше наступного. Тому я зробив якщо більше але це можно змінити просто змінивши знак на протилежний  в if (va_arg(variables, int) > va_arg(variables_copy, int)) (змінити `>` на `<`).
 
 * Висновок: Щоб зробити программу 6 лаборатоної нормальною треба вчити вказівники.
