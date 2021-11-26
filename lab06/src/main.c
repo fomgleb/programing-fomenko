@@ -17,7 +17,7 @@ int main()
 	int number = 3562;
 
 	short thereIsMinus = 0;
-	if (number > 0) { 
+	if (number < 0) { 
 		number *= -1;
 		thereIsMinus = 1;
 	}
@@ -27,7 +27,7 @@ int main()
 	int thirdFigure = (number / 10) % 10;
 	int fourthFigure = number % 10;
 
-	char figures[FIGURES_COUNT][STRING_SIZE] = { "",	 "one",	    "two",     "three",	    "four",	"five",	   "six",
+	char figures[FIGURES_COUNT][STRING_SIZE] = { "zero",	 "one",	    "two",     "three",	    "four",	"five",	   "six",
 						     "seven",	 "eight",   "nine",    "ten",	    "eleven",	"twelve",  "thirteen",
 						     "fourteen", "fifteen", "sixteen", "seventeen", "eighteen", "nineteen" };
 	char tens[TENS_COUNT][STRING_SIZE] = { "", "ten", "twenty", "thirty", "fourty", "fifty", "sixty", "seventy", "eighty", "ninety" };
@@ -44,7 +44,9 @@ int main()
 		// minus or zero
 		case 0:
 			if (firstFigure == 0 && secondFigure == 0 && thirdFigure == 0 && fourthFigure == 0) {
-				result[i][0] = '0';
+				for (int j = 0; j < STRING_SIZE; j++) {
+					result[i][j] = figures[i][j];
+				}
 				break;
 			}
 			if (thereIsMinus == 1) {
