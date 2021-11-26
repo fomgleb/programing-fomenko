@@ -6,7 +6,7 @@
 
 0. Скопіював папку lab05 командою `cp -r lab05 lab06`
 
-* Видалив весь код в src/main.c, та написав такий:
+* Написав код для перевірки чи від'емне число:
 
 		/*
 		 * Translate a number to string (min: -9999, max: 9999).
@@ -31,126 +31,140 @@
 				number *= -1;
 			}
 
-			int firstFigure = number / 1000;
-			int secondFigure = (number / 100) % 10;
-			int thirdFigure = (number / 10) % 10;
-			int fourthFigure = number % 10; 
+* Далі программа бере цифри number і записує їх в змінні: 
 
-			char figures[FIGURES_COUNT][STRING_SIZE] = {"", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten", "eleven", "twelve", "thirteen", "fourteen", "fifteen", "sixteen", "seventeen", "eighteen", "nineteen"};
-			char tens[TENS_COUNT][STRING_SIZE] = {"", "ten", "twenty", "thirty", "fourty", "fifty", "sixty", "seventy", "eighty", "ninety"};
-			char thousand[9] = "thousand";
-			char hundred[7] = "hundred";
-			char and[3] = "and";
-			char minus[6] = "minus";
+		int firstFigure = number / 1000;
+		int secondFigure = (number / 100) % 10;
+		int thirdFigure = (number / 10) % 10;
+		int fourthFigure = number % 10; 
 
-			int filledCharsInResult = 0;
-			
-			char result[RESULTING_ARRAY_COUNT][STRING_SIZE] = {"","","","","","","",""};
-			for (int i = 0; i < RESULTING_ARRAY_COUNT; i++) {
-				switch (i) {
-					// minus or zero
-					case 0:
-						if (firstFigure == 0 && secondFigure == 0 && thirdFigure == 0 && fourthFigure == 0) {
-							result[i][0] = '0';
-							break;
-						}
-						if (thereIsMinus == 1) {
-							for (int j = 0; j < (int)sizeof(minus); j++) {
-								result[i][j] = minus[j];
-							}
-						}
-						break;
-					// one, two, three... thousand
-					case 1:
-						if (firstFigure > 0) {
-							for (int j = 0; j < STRING_SIZE; j++) {
-								result[i][j] = figures[firstFigure][j];
-							}
-							i++;
-							for (int j = 0; j < (int)sizeof(thousand); j++) {
-								result[i][j] = thousand[j];
-							}
+* Тут ініціалізуються массиви які необхідні для переводу:
 
-						}
-						break;
-					// one, two, three... hundred
-					case 3:
-						if (secondFigure > 0) {
-							for (int j = 0; j < STRING_SIZE; j++) {
-								result[i][j] = figures[secondFigure][j];
-							}
-							i++;
-							for (int j = 0; j < (int)sizeof(hundred); j++) {
-								result[i][j] = hundred[j];
-							}
+		char figures[FIGURES_COUNT][STRING_SIZE] = {"zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten", "eleven", "twelve", "thirteen", "fourteen", "fifteen", "sixteen", "seventeen", "eighteen", "nineteen"};
+		char tens[TENS_COUNT][STRING_SIZE] = {"", "ten", "twenty", "thirty", "fourty", "fifty", "sixty", "seventy", "eighty", "ninety"};
+		char thousand[9] = "thousand";
+		char hundred[7] = "hundred";
+		char and[3] = "and";
+		char minus[6] = "minus";
 
-						}
-						break;
-					// and
-					case 5:
-						if ((firstFigure != 0 || secondFigure != 0) && (thirdFigure != 0 || fourthFigure != 0)) {
-							for (int j = 0; j < (int)sizeof(and); j++) {
-								result[i][j] = and[j];
-							}
-						}
-						break;
-					// one, two, three... eleven, twelve... twenty one, thirty one	
-					case 6:
-						if (thirdFigure == 1) {
-							for (int j = 0; j < STRING_SIZE; j++) {
-								result[i][j] = figures[thirdFigure * 10 + fourthFigure][j];
-							}
-							i++;
+* Ця частина коду вже заповнюе массив result відповідними словами:
 
-						}
-						else if (thirdFigure > 1) {
-							for (int j = 0; j < STRING_SIZE; j++) {
-								result[i][j] = tens[thirdFigure][j];
-							}
-							i++;
-							for (int j = 0; j < STRING_SIZE; j++) {
-								result[i][j] = figures[fourthFigure][j];
-							}
-						}
-						break;
-					// one, two, three
-					case 7:
-						if (fourthFigure > 0) {
-							for (int j = 0; j < (int)sizeof(figures)[0]; j++) {
-								result[i][j] = figures[fourthFigure][j];
-							}
+		int filledCharsInResult = 0;
+		
+		char result[RESULTING_ARRAY_COUNT][STRING_SIZE] = {"","","","","","","",""};
+		for (int i = 0; i < RESULTING_ARRAY_COUNT; i++) {
+			switch (i) {
+				// minus or zero
+				case 0:
+					if (firstFigure == 0 && secondFigure == 0 && thirdFigure == 0 && fourthFigure == 0) {
+						for (int j = 0; j < STRING_SIZE; j++) {
+							result[i][j] = figures[0][j];
 						}
 						break;
-					default:
-						break;
-				}
+					}
+					if (thereIsMinus == 1) {
+						for (int j = 0; j < (int)sizeof(minus); j++) {
+							result[i][j] = minus[j];
+						}
+					}
+					break;
+				// one, two, three... thousand
+				case 1:
+					if (firstFigure > 0) {
+						for (int j = 0; j < STRING_SIZE; j++) {
+							result[i][j] = figures[firstFigure][j];
+						}
+						i++;
+						for (int j = 0; j < (int)sizeof(thousand); j++) {
+							result[i][j] = thousand[j];
+						}
+
+					}
+					break;
+				// one, two, three... hundred
+				case 3:
+					if (secondFigure > 0) {
+						for (int j = 0; j < STRING_SIZE; j++) {
+							result[i][j] = figures[secondFigure][j];
+						}
+						i++;
+						for (int j = 0; j < (int)sizeof(hundred); j++) {
+							result[i][j] = hundred[j];
+						}
+
+					}
+					break;
+				// and
+				case 5:
+					if ((firstFigure != 0 || secondFigure != 0) && (thirdFigure != 0 || fourthFigure != 0)) {
+						for (int j = 0; j < (int)sizeof(and); j++) {
+							result[i][j] = and[j];
+						}
+					}
+					break;
+				// one, two, three... eleven, twelve... twenty one, thirty one	
+				case 6:
+					if (thirdFigure == 1) {
+						for (int j = 0; j < STRING_SIZE; j++) {
+							result[i][j] = figures[thirdFigure * 10 + fourthFigure][j];
+						}
+						i++;
+
+					}
+					else if (thirdFigure > 1) {
+						for (int j = 0; j < STRING_SIZE; j++) {
+							result[i][j] = tens[thirdFigure][j];
+						}
+						i++;
+						for (int j = 0; j < STRING_SIZE; j++) {
+							result[i][j] = figures[fourthFigure][j];
+						}
+					}
+					break;
+				// one, two, three
+				case 7:
+					if (fourthFigure > 0) {
+						for (int j = 0; j < (int)sizeof(figures)[0]; j++) {
+							result[i][j] = figures[fourthFigure][j];
+						}
+					}
+					break;
+				default:
+					break;
 			}
-
-			// Write to from array into string
-			char printableResult[RESULT_COUNT];
-
-			int limitingChar;
-			for (int i = 0, k = 0; i < (int)sizeof(result)/(int)sizeof(result[0]); i++) {
-				for (int j = 0; j < STRING_SIZE; j++, k++) {
-					if (result[i][j] == '\0') {break;}
-					printableResult[k] = result[i][j];
-				}
-				if (result[i][0] != '\0') {
-					printableResult[k] = ' ';
-					k++;
-				}
-				limitingChar = k;
-			}
-			printableResult[limitingChar] = '\0';	
-
-			// Remove useless spaces
-			for (int i = 0, j = 0; i < RESULT_COUNT; i++) {
-				if (printableResult[i] == ' ' && ((printableResult[i+1] == ' ' || printableResult[i+1] == '\0')/* || (printableResult[i-1] == ' ' || printableResult[i-1] == '\0')*/)) {continue;}
-				printableResult[j] = printableResult[i];
-				j++;
-			}
-
-			return 0;
 		}
 
-Висновок: я ще не знаю що таке функції і це дуже погано. Писати на чистому си дуже боляче.
+* Записую данні з массиву result в массив printableResult
+
+		// Write to from array into string
+		char printableResult[RESULT_COUNT];
+
+		int limitingChar;
+		for (int i = 0, k = 0; i < (int)sizeof(result)/(int)sizeof(result[0]); i++) {
+			for (int j = 0; j < STRING_SIZE; j++, k++) {
+				if (result[i][j] == '\0') {break;}
+				printableResult[k] = result[i][j];
+			}
+			if (result[i][0] != '\0') {
+				printableResult[k] = ' ';
+				k++;
+			}
+			limitingChar = k;
+		}
+		printableResult[limitingChar] = '\0';	
+
+* Видаляю непотрібні спейси в result
+
+		// Remove useless spaces
+		for (int i = 0, j = 0; i < RESULT_COUNT; i++) {
+			if (printableResult[i] == ' ' && ((printableResult[i+1] == ' ' || printableResult[i+1] == '\0')/* || (printableResult[i-1] == ' ' || printableResult[i-1] == '\0')*/)) {continue;}
+			printableResult[j] = printableResult[i];
+			j++;
+		}
+
+		return 0;
+	}
+
+
+
+Висновок: Я вважаю що писати в консолі, не дуже розумно, тому що я не можу швидко виправляти свої помилки та швидко писати код. В цій лабораторній я зрозумів як записати цифру якогось числа в змінну.
