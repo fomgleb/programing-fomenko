@@ -1,9 +1,22 @@
-/*
+/* lab06
  * Translate a number to string (min: -9999, max: 9999).
  *
  * Example: 3562 => "three thousand fife hundred and sixty two"
  *
  */
+
+/* lab05
+ * Find the greatest common divisor of two numbers
+ *
+ * input:
+ * 	int first_num;
+ * 	int second_num;
+ *
+ * output:
+ * 	int GCD;
+ *	
+ */
+
 
 #define RESULT_COUNT 100
 #define FIGURES_COUNT 20
@@ -15,14 +28,27 @@
 
 char printableResult[RESULT_COUNT];
 
+int get_greatest_common_divisor(int first_num, int second_num);
 void make_string_from_number(int number);
 
 #include <time.h>
 #include <stdlib.h>
 int main(int argc, char **argv)
 {
-	
-	// input
+	// lab05
+	int first_num;
+	int second_num;
+	if (argc == 1) {
+		srandom((unsigned int)time(NULL));
+		first_num = (int)random();
+		second_num = (int)random();
+	} else {
+		first_num = (int)strtod(argv[1], 0);
+		second_num = (int)strtod(argv[2], 0);
+	}
+	int greatest_common_divisor = get_greatest_common_divisor(first_num, second_num);
+
+	// lab06
 	int number = 0;
 	if (argc == 1) {
 		srandom((unsigned int)time(NULL));
@@ -30,10 +56,27 @@ int main(int argc, char **argv)
 	} else {
 		number = (int)strtod(argv[1], 0);
 	}
-
 	make_string_from_number(number);
 
 	return 0;
+}
+
+int get_greatest_common_divisor(int first_num, int second_num)
+{
+	// використовую метод ейлера
+	int greatest_common_divisor = 0;
+	while (greatest_common_divisor == 0) {
+		if (first_num > second_num) {
+			first_num = first_num % second_num;
+		} else {
+			second_num = second_num % first_num;
+		}
+
+		if (first_num == 0 || second_num == 0) {
+			greatest_common_divisor = first_num == 0 ? second_num : first_num;
+		}
+	}
+	return greatest_common_divisor;
 }
 
 void make_string_from_number(int number) {
