@@ -20,11 +20,11 @@
  */
 START_TEST(test_get_greatest_common_divisor)
 {
-#define DATA_SIZE_SUM 4
+#define DATA_SIZE 4
 	int input_data_a[] = { 25, 9, 415, 79 };
 	int input_data_b[] = { 5, 8, 38405, 79 };
 	int expected_values[] = { 5, 1, 5, 79 };
-	for (int i = 0; i < DATA_SIZE_SUM; i++) {
+	for (int i = 0; i < DATA_SIZE; i++) {
 		int actual_value = get_greatest_common_divisor(input_data_a[i], input_data_b[i]);
 		ck_assert_int_eq(expected_values[i], actual_value);
 	}
@@ -33,9 +33,6 @@ END_TEST
 
 /**
  * Точка входу модуля тестування.
- *
- * Запускає розроблені функції верифікації функцій роботи з структурой
- * {@link animal}.
  *
  * По завершенню тестів виводиться на екран резуміюча інформація про стан
  * проходження тестів.
