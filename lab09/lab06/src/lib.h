@@ -24,17 +24,19 @@ void make_string_from_number(int number, char result[]);
  * @brief Функція бере переданий параметр {@link word}, та знаходить кількість символів без символа '\0'
  * 
  * @param word - массив, у котрого треба знайти реальний розмір
+ * @param size - неправдивий розмір слова
  * @return кількість символів в массиві не враховуючи символ '\0'
  */
-size_t get_real_word_size(char word[]);
+int get_real_word_size(char word[], int size);
 
 /**
  * @brief Функція додавє в кінець массиву {@link text} - слово {@link word}
  * 
  * @param text - массив, в в кінець якого додається {@link word}
  * @param word - слово, яке додається в кінець массиву {@link text}
+ * @param word_size - розмір слова
  * @param inserting_index - індекс массиву {@link text}, з якого буде починатися додавання {@link word}
  * @param add_space_in_the_end - якщо true - в кінець {@link text} буде доданий спейс, та навпаки 
  * @return кількість символів які були додані в массив {@link text} при виконанні функції
  */
-int insert_word_in_the_end(char text[], char word[], int inserting_index, bool add_space_in_the_end);
+int insert_word_in_the_end(char text[], char word[], int word_size, int inserting_index, bool add_space_in_the_end);
