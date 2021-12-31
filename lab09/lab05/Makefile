@@ -9,6 +9,8 @@ clean:
 	rm -rf dist
 prep:
 	mkdir dist
+format:
+	clang-format -i src/* test/test.c
 compile: main.bin test.bin
 
 main.bin: src/main.c
