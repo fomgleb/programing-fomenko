@@ -27,7 +27,7 @@ void make_string_from_number(int number, char result[]);
  * @param size - неправдивий розмір слова
  * @return кількість символів в массиві не враховуючи символ '\0'
  */
-int get_real_word_size(char word[], int size);
+int get_real_word_size(char const word[], int size);
 
 /**
  * @brief Функція додавє в кінець массиву {@link text} - слово {@link word}

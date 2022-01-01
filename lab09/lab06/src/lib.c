@@ -33,62 +33,62 @@ void make_string_from_number(int number, char result[])
 	}
 
 	// minus check
-	short thereIsMinus = 0;
+	short there_is_minus = 0;
 	if (number < 0) {
 		number *= -1;
-		thereIsMinus = 1;
+		there_is_minus = 1;
 	}
 
-	int firstFigure = number / 1000;
-	int secondFigure = (number / 100) % 10;
-	int thirdFigure = (number / 10) % 10;
-	int fourthFigure = number % 10;
+	int first_figure = number / 1000;
+	int second_figure = (number / 100) % 10;
+	int third_figure = (number / 10) % 10;
+	int fourth_figure = number % 10;
 
 	int max_symbols_in_result = MAX_WORDS_COUNT * MAX_WORD_SIZE;
 	int writed_symbols = 0;
 	// zero
-	if (firstFigure == 0 && secondFigure == 0 && thirdFigure == 0 && fourthFigure == 0) {
+	if (first_figure == 0 && second_figure == 0 && third_figure == 0 && fourth_figure == 0) {
 		writed_symbols += insert_word_in_the_end(result, figures[0], MAX_WORD_SIZE, writed_symbols, false);
 	} else {
 		//minus
-		if (thereIsMinus == 1) {
+		if (there_is_minus == 1) {
 			writed_symbols += insert_word_in_the_end(result, minus_word, MAX_WORD_SIZE, writed_symbols, true);
 		}
 
 		// (one || two || three || four || five || six || seven || eight || nine) thousand
-		if (firstFigure > 0) {
-			writed_symbols += insert_word_in_the_end(result, figures[firstFigure], MAX_WORD_SIZE, writed_symbols, true);
+		if (first_figure > 0) {
+			writed_symbols += insert_word_in_the_end(result, figures[first_figure], MAX_WORD_SIZE, writed_symbols, true);
 			writed_symbols += insert_word_in_the_end(result, thousand_word, MAX_WORD_SIZE, writed_symbols, true);
 		}
 
 		// (one || two || three || four || five || six || seven || eight || nine) hundred
-		if (secondFigure > 0) {
-			writed_symbols += insert_word_in_the_end(result, figures[secondFigure], MAX_WORD_SIZE, writed_symbols, true);
+		if (second_figure > 0) {
+			writed_symbols += insert_word_in_the_end(result, figures[second_figure], MAX_WORD_SIZE, writed_symbols, true);
 			writed_symbols += insert_word_in_the_end(result, hundred_word, MAX_WORD_SIZE, writed_symbols, true);
 		}
 
 		// and
-		if ((firstFigure != 0 || secondFigure != 0) && (thirdFigure != 0 || fourthFigure != 0)) {
+		if ((first_figure != 0 || second_figure != 0) && (third_figure != 0 || fourth_figure != 0)) {
 			writed_symbols += insert_word_in_the_end(result, and_word, MAX_WORD_SIZE, writed_symbols, true);
 		}
 
 		// ten || eleven || twelve || thirteen || fourteen || fifteen || sixteen || seventeen || eighteen || nineteen
-		if (thirdFigure == 1) {
-			writed_symbols += insert_word_in_the_end(result, figures[10 + fourthFigure], MAX_WORD_SIZE, writed_symbols, false);
+		if (third_figure == 1) {
+			writed_symbols += insert_word_in_the_end(result, figures[10 + fourth_figure], MAX_WORD_SIZE, writed_symbols, false);
 			// twenty || thirty || ... || eighty || ninety ||
-		} else if (thirdFigure > 1) {
-			writed_symbols += insert_word_in_the_end(result, tens[thirdFigure], MAX_WORD_SIZE, writed_symbols, false);
+		} else if (third_figure > 1) {
+			writed_symbols += insert_word_in_the_end(result, tens[third_figure], MAX_WORD_SIZE, writed_symbols, false);
 		}
 
-		if (fourthFigure > 0) {
+		if (fourth_figure > 0) {
 			// -one || -two || ... || -eight || -nine
-			if (thirdFigure > 1) {
+			if (third_figure > 1) {
 				writed_symbols += insert_word_in_the_end(result, "-", MAX_WORD_SIZE, writed_symbols, false);
-				writed_symbols += insert_word_in_the_end(result, figures[fourthFigure], MAX_WORD_SIZE, writed_symbols, false);
+				writed_symbols += insert_word_in_the_end(result, figures[fourth_figure], MAX_WORD_SIZE, writed_symbols, false);
 			}
 			// one || two || ... || eight || nine
-			if (thirdFigure == 0) {
-				writed_symbols += insert_word_in_the_end(result, figures[fourthFigure], MAX_WORD_SIZE, writed_symbols, false);
+			if (third_figure == 0) {
+				writed_symbols += insert_word_in_the_end(result, figures[fourth_figure], MAX_WORD_SIZE, writed_symbols, false);
 			}
 		}
 	}
@@ -100,7 +100,7 @@ void make_string_from_number(int number, char result[])
 	}
 }
 
-int get_real_word_size(char word[], int size)
+int get_real_word_size(char const word[], int size)
 {
 	int word_size = 0;
 	for (int i = 0; i < size; i++) {
