@@ -1,7 +1,7 @@
 ## Common Project info
-PROJECT_NAME = 
-PROJECT_BRIEF = 
-PROJECT_NUMBER = 
+PROJECT_NAME = "Повторювання чисел в масиві"
+PROJECT_BRIEF = "Програма повертає масив чисел, в кожен непарний елемент - число, а кожен непарний елемент - кількість повторювань"
+PROJECT_NUMBER = lab10
 
 ## output options
 OUTPUT_DIRECTORY = ./dist
