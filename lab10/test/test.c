@@ -28,7 +28,7 @@ START_TEST(test_get_random_numbers)
 	int expected_min_value = -10;
 	int expected_max_value = 9;
 
-	size_t array_length = 50;
+	size_t array_length = 500;
 	int *array = get_random_numbers(array_length, input_min_value, input_max_value);
 
 	int actual_min_value = INT_MAX;
