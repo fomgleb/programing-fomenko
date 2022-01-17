@@ -2,3 +2,4 @@ dist/
 .idea
 *.c.dump
 cmake-build-debug
+default.profraw
