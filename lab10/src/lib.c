@@ -25,10 +25,6 @@ size_t get_count_of_number_repetitions(const int *numbers, size_t length, int nu
 {
 	size_t repetitions_counter = 0;
 
-	if (numbers == NULL) {
-		return 0;
-	}
-
 	for (size_t i = 0; i < length; i++) {
 		if (numbers + i != NULL && *(numbers + i) == number_to_check) {
 			repetitions_counter++;
