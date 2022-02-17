@@ -31,15 +31,6 @@ int *get_random_numbers(size_t length, int min_value, int max_value);
 size_t get_count_of_number_repetitions(const int *numbers, size_t length, int number_to_check);
 
 /**
- * @brief Отримати скопійований масив
- * 
- * @param array_to_copy - масив який треба скопіювати
- * @param length - довжина масиву
- * @return скопійований масив
- */
-int *get_copied_array(const int *array_to_copy, size_t length);
-
-/**
  * @brief Отримати масив який містить інформацію про числа які повторюються,
  * кожен непарний елемент масиву - число, яке повторюється. Кожен парний -
  * кількість повторювань. Наприклад: array[0] = 8, array[1] = 3, 8 - число,

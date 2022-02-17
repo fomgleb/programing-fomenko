@@ -34,17 +34,6 @@ size_t get_count_of_number_repetitions(const int *numbers, size_t length, int nu
 	return repetitions_counter;
 }
 
-int *get_copied_array(const int *array_to_copy, size_t length)
-{
-	int *copied_array = malloc(length * sizeof(int));
-
-	for (size_t i = 0; i < length; i++) {
-		*(copied_array + i) = *(array_to_copy + i);
-	}
-
-	return copied_array;
-}
-
 int *get_information_about_repeating_numbers(const int *numbers, size_t length)
 {
 	int *information = malloc(length * sizeof(int));

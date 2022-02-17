@@ -42,6 +42,8 @@ START_TEST(test_get_random_numbers)
 
 	ck_assert_int_eq(expected_min_value, actual_min_value);
 	ck_assert_int_eq(expected_max_value, actual_max_value);
+
+	free(array);
 }
 END_TEST
 
@@ -77,39 +79,6 @@ START_TEST(test_get_count_of_number_repetitions)
 END_TEST
 
 /**
- * @brief Верифікація роботи функції {@link get_copied_array}
- * на основі масивів вхідних та очікуваних даних
- * 
- * @return стан проходження тестів: 0 - тест пройшов успішно, 1 - тест
- * не пройшов
- */
-START_TEST(test_get_copied_array)
-{
-	const size_t data_size = 4;
-
-	size_t input_lengths[] = { 6, 22, 1, 1 };
-	int input_and_expected_arrays[][22] = { { -3, 12, 5, 6, 2, 457 },
-						{ 2, 8, 4, 3, 2, 4, 7, 7, 5, 3, 2, 456765, 434567, 876, 543, 456, 78, 7654, 32, 35678, 7654, 32 },
-						{ 1 },
-						{ 0 } };
-
-	int *actual_values[data_size];
-
-	for (size_t i = 0; i < data_size; i++) {
-		for (size_t j = 0; j < input_lengths[i]; j++) {
-			actual_values[i] = get_copied_array(input_and_expected_arrays[i], input_lengths[i]);
-		}
-	}
-
-	for (size_t i = 0; i < data_size; i++) {
-		for (size_t j = 0; j < input_lengths[i]; j++) {
-			ck_assert_int_eq(input_and_expected_arrays[i][j], actual_values[i][j]);
-		}
-	}
-}
-END_TEST
-
-/**
  * @brief Верифікація роботи функції {@link get_information_about_repeating_numbers}
  * на основі масивів вхідних та очікуваних даних
  * 
@@ -139,6 +108,9 @@ START_TEST(test_get_information_about_repeating_numbers)
 			ck_assert_int_eq(expected_information[i][j], actual_information[i][j]);
 		}
 	}
+
+	for (size_t i = 0; i < data_size; i++)
+		free(actual_information[i]);
 }
 END_TEST
 
@@ -157,7 +129,6 @@ int main(void)
 	TCase *tc_core = tcase_create("lab10");
 	tcase_add_test(tc_core, test_get_random_numbers);
 	tcase_add_test(tc_core, test_get_count_of_number_repetitions);
-	tcase_add_test(tc_core, test_get_copied_array);
 	tcase_add_test(tc_core, test_get_information_about_repeating_numbers);
 	suite_add_tcase(s, tc_core);
 	SRunner *sr = srunner_create(s);
