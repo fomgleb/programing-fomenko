@@ -14,15 +14,15 @@ void subtract_main_line_from_another(long double matrix[], size_t width, size_t 
 				     long double subtrahend_line_multiplier);
 bool is_equals_to_zero(long double number_to_compare);
 
-#define SIZE 7
+#define SIZE 5
 
 int main(int argc, char **argv)
 {
-	int matrix[SIZE * SIZE]; // = { 58, 67, 56, 55, 34,
-	//							84, 56, 56, 44, 21,
-	//							67, 54, 45, 65, 65,
-	//							67, 654, 56, 76, 63,
-	//							12, 64, 67, 12, 9 };
+	int matrix[SIZE * SIZE] = { 58, 67, 56, 55, 34,
+								84, 56, 56, 44, 21,
+								67, 54, 45, 65, 65,
+								67, 654, 56, 76, 63,
+								12, 64, 67, 12, 9 };
 
 	if (argc == SIZE * SIZE + 1) {
 		for (size_t i = 0; i < SIZE * SIZE; i++) {
