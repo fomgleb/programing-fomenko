@@ -5,3 +5,4 @@ cmake-build-debug
 default.profraw
 .vscode
 tsconfig.json
+assets/
