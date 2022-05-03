@@ -73,7 +73,7 @@ START_TEST(test_get_repeating_chars_counts)
 	char input_texts[ARRAYS_COUNT][20] = { "I'm glad to see you\0", "444 888 2\0", "marin kitagawa\0" };
 	size_t input_texts_lengths[ARRAYS_COUNT] = { 20, 10, 15 };
 	char expected_output_repeating_chars_array[ARRAYS_COUNT][19] = { "I'm gladtoseyu", "4 82", "marin ktgw" };
-	size_t expected_repeating_chars_counts_array[ARRAYS_COUNT][19] = { { 1, 1, 1, 4, 1, 1, 1, 1, 1, 2, 1, 2, 1, 1},
+	size_t expected_repeating_chars_counts_array[ARRAYS_COUNT][19] = { { 1, 1, 1, 4, 1, 1, 1, 1, 1, 2, 1, 2, 1, 1 },
 									   { 3, 2, 3, 1 },
 									   { 1, 4, 1, 2, 1, 1, 1, 1, 1, 1 } };
 	char *actual_output_repeating_chars_array[ARRAYS_COUNT];
@@ -88,9 +88,8 @@ START_TEST(test_get_repeating_chars_counts)
 	}
 
 	for (size_t i = 0; i < ARRAYS_COUNT; i++) {
-		for (size_t j = 0; actual_output_repeating_chars_array[i][j] != '\0'; j++)
-		{
-			ck_assert_str_eq (actual_output_repeating_chars_array[i], expected_output_repeating_chars_array[i]);
+		for (size_t j = 0; actual_output_repeating_chars_array[i][j] != '\0'; j++) {
+			ck_assert_str_eq(actual_output_repeating_chars_array[i], expected_output_repeating_chars_array[i]);
 			ck_assert_int_eq(actual_repeating_chars_counts_array[i][j], expected_repeating_chars_counts_array[i][j]);
 		}
 	}
