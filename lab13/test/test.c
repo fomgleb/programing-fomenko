@@ -48,13 +48,6 @@ START_TEST(test_get_max_matrix_element)
 	for (size_t i = 0; i < MATRIXES_COUNT; i++) {
 		ck_assert_int_eq(expected_max_elements[i], actual_max_elements[i]);
 	}
-
-	// for (size_t i = 0; i < MATRIXES_COUNT; i++) {
-	// 	for (size_t y = 0; y < input_matrixes_heights[i]; y++) {
-	// 		free(input_dynamic_matrixes[i][y]);
-	// 	}
-	// 	free(input_dynamic_matrixes[i]);
-	// }
 }
 END_TEST
 
@@ -91,7 +84,7 @@ END_TEST
 int main(void)
 {
 	Suite *s = suite_create("Programing");
-	TCase *tc_core = tcase_create("lab12");
+	TCase *tc_core = tcase_create("lab13");
 	tcase_add_test(tc_core, test_get_max_matrix_element);
 	tcase_add_test(tc_core, test_write_to_file_and_read_from_file);
 	suite_add_tcase(s, tc_core);
