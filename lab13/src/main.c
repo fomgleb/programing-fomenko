@@ -38,7 +38,7 @@ int main()
 {
 	const char PATH_TO_LABORATORY_DATA_FILE[] = "assets/input.txt";
 	const char PATH_TO_INPUT_MATRIX_FILE[] = "assets/input_matrix.txt";
-	const char PATH_OUTPUT_FILE[] = "assets/output.txt";
+	const char PATH_TO_OUTPUT_FILE[] = "assets/output.txt";
 
 	// Information about laboratory work
 	char *laboratory_data = read_from_file(PATH_TO_LABORATORY_DATA_FILE, 20, 1000);
@@ -87,7 +87,7 @@ int main()
 	// Write max matrix element to file
 	char writing_data[10];
 	sprintf(writing_data, "%.2f", max_matrix_element);
-	write_to_file(PATH_OUTPUT_FILE, writing_data);
+	write_to_file(PATH_TO_OUTPUT_FILE, writing_data);
 
 	// Data releasing
 	free(laboratory_data);
