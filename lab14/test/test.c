@@ -49,6 +49,84 @@ START_TEST(test_save_countries_to_file_and_load_countries_from_file)
 	for (size_t i = 0; i < input_and_expected_countries_count; i++) {
 		assert_countries(input_and_expected_countries[i], actual_countries[i]);
 	}
+
+	free(input_and_expected_countries);
+	free(actual_countries);
+}
+END_TEST
+
+/**
+ * @brief Верифікація роботи функції {@find_countries_with_two_different_criteria}
+ * на основі масивів вхідних та очікуваних даних
+ * 
+ * @return стан проходження тестів: 0 - тест пройшов успішно, 1 - тест
+ * не пройшов
+ */
+START_TEST(test_find_countries_with_two_different_criteria)
+{
+	size_t input_countries_count = 5;
+	struct country *input_countries = malloc(input_countries_count * sizeof(struct country));
+	struct country input_and_expected_country_1 = { "Японія", 1, 50, { 20, 90, 10 }, 1, 0 };
+	struct country input_country_2 = { "СРСР", 0, 20, { 50, 80, 40 }, 1, 1 };
+	struct country input_and_expected_country_3 = { "Германія", 0, 20, { 50, 80, 40 }, 1, 0 };
+	struct country input_country_4 = { "Фрайнція", 0, 20, { 50, 80, 40 }, 0, 0 };
+	struct country input_country_5 = { "Польща", 0, 20, { 50, 80, 40 }, 1, 1 };
+	enum criterion input_criteria[2] = { COUNTRY_SYSTEM_BEFORE_WAR, COUNTRY_SYSTEM_AFTER_WAR };
+	input_countries[0] = input_and_expected_country_1;
+	input_countries[1] = input_country_2;
+	input_countries[2] = input_and_expected_country_3;
+	input_countries[3] = input_country_4;
+	input_countries[4] = input_country_5;
+	size_t expected_countries_count = 2;
+	struct country *expected_countries = malloc(expected_countries_count * sizeof(struct country));
+	expected_countries[0] = input_and_expected_country_1;
+	expected_countries[1] = input_and_expected_country_3;
+
+	size_t actual_countries_count = 0;
+	struct country *actual_countries = find_countries_with_two_different_criteria(input_countries, input_countries_count, input_criteria[0],
+										      input_criteria[1], &actual_countries_count);
+
+	ck_assert_int_eq(expected_countries_count, actual_countries_count);
+	for (size_t i = 0; i < expected_countries_count; i++) {
+		assert_countries(expected_countries[i], actual_countries[i]);
+	}
+
+	free(input_countries);
+	free(expected_countries);
+	free(actual_countries);
+}
+END_TEST
+
+/**
+ * @brief Верифікація роботи функції {@sort_by_criterion}
+ * на основі масивів вхідних та очікуваних даних
+ * 
+ * @return стан проходження тестів: 0 - тест пройшов успішно, 1 - тест
+ * не пройшов
+ */
+START_TEST(test_sort_by_criterion){
+	size_t countries_count = 3;
+	struct country *input_and_actual_countries = malloc(countries_count * sizeof(struct country));
+	struct country country_1 = { "СРСР", 0, 500, { 50, 80, 40 }, 1, 1 };
+	struct country country_2 = { "Італія", 1, 204, { 50, 80, 40 }, 1, 1 };
+	struct country country_3 = { "Нідерланди", 0, 2340, { 50, 80, 40 }, 1, 1 };
+	input_and_actual_countries[0] = country_1;
+	input_and_actual_countries[1] = country_2;
+	input_and_actual_countries[2] = country_3;
+	enum criterion input_sorting_criterion = AREA;
+	struct country *expected_countries = malloc(countries_count * sizeof(struct country));
+	expected_countries[0] = country_3;
+	expected_countries[1] = country_1;
+	expected_countries[2] = country_2;
+
+	sort_by_criterion(input_and_actual_countries, countries_count, input_sorting_criterion);
+
+	for (size_t i = 0; i < countries_count; i++) {
+		assert_countries(input_and_actual_countries[i], expected_countries[i]);
+	}
+	
+	free(input_and_actual_countries);
+	free(expected_countries);
 }
 END_TEST
 
@@ -66,6 +144,8 @@ int main(void)
 	Suite *s = suite_create("Programing");
 	TCase *tc_core = tcase_create("lab14");
 	tcase_add_test(tc_core, test_save_countries_to_file_and_load_countries_from_file);
+	tcase_add_test(tc_core, test_find_countries_with_two_different_criteria);
+	tcase_add_test(tc_core, test_sort_by_criterion);
 	suite_add_tcase(s, tc_core);
 	SRunner *sr = srunner_create(s);
 	srunner_run_all(sr, CK_VERBOSE);
