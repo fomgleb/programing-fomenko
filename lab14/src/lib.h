@@ -97,6 +97,13 @@ void print_countries(struct country *countries, size_t countries_count);
 #pragma endregion
 
 #pragma region Сортування
+/**
+ * @brief Відсортувати за критерієм
+ * 
+ * @param countries масив країн які треба відсортувати
+ * @param countries_count кількість країн
+ * @param sorting_criterion критерій сортування (поле по якому треба сортувати)
+ */
 void sort_by_criterion(struct country *countries, size_t countries_count, enum criterion sorting_criterion);
 
 int sort_by_is_fighting(struct country *country1, struct country *country2);
