@@ -113,7 +113,8 @@ int main()
 				} else
 					break;
 			}
-			countries = realloc(countries, ++countries_count * sizeof(struct country));
+			countries_count++;
+			countries = realloc(countries, countries_count * sizeof(struct country));
 			countries[countries_count - 1] = new_country;
 		} break;
 

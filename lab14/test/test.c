@@ -10,6 +10,18 @@
 #include "lib.h"
 #include <check.h>
 
+void assert_countries(struct country country_1, struct country country_2)
+{
+	ck_assert_str_eq(country_1.name, country_2.name);
+	ck_assert_int_eq(country_1.is_fighting, country_2.is_fighting);
+	ck_assert_int_eq(country_1.area, country_2.area);
+	ck_assert_int_eq(country_1.Combat_power.number_of_infantry, country_2.Combat_power.number_of_infantry);
+	ck_assert_int_eq(country_1.Combat_power.number_of_air_forces, country_2.Combat_power.number_of_air_forces);
+	ck_assert_int_eq(country_1.Combat_power.number_of_naval_forces, country_2.Combat_power.number_of_naval_forces);
+	ck_assert_int_eq(country_1.Country_system_before_war, country_2.Country_system_before_war);
+	ck_assert_int_eq(country_1.Country_system_after_war, country_2.Country_system_after_war);
+}
+
 /**
  * @brief Верифікація роботи функції {@link save_countries_to_file} та {@link load_countries_from_file}
  * на основі масивів вхідних та очікуваних даних
@@ -19,45 +31,23 @@
  */
 START_TEST(test_save_countries_to_file_and_load_countries_from_file)
 {
-	const size_t COUNTRIES_COUNT = 2;
 	const char PATH_TO_FILE[] = "test/test.txt";
 
-	struct country *input_and_expected_countries = malloc(COUNTRIES_COUNT * sizeof(struct country));
-	input_and_expected_countries[0].name = "Японія";
-	input_and_expected_countries[0].is_fighting = true;
-	input_and_expected_countries[0].area = 50;
-	input_and_expected_countries[0].Combat_power.number_of_infantry = 20;
-	input_and_expected_countries[0].Combat_power.number_of_air_forces = 90;
-	input_and_expected_countries[0].Combat_power.number_of_naval_forces = 10;
-	input_and_expected_countries[0].Country_system_before_war = MONARCHY;
-	input_and_expected_countries[0].Country_system_after_war = REPUBLIC;
-	input_and_expected_countries[1].name = "СРСР";
-	input_and_expected_countries[1].is_fighting = false;
-	input_and_expected_countries[1].area = 20;
-	input_and_expected_countries[1].Combat_power.number_of_infantry = 50;
-	input_and_expected_countries[1].Combat_power.number_of_air_forces = 80;
-	input_and_expected_countries[1].Combat_power.number_of_naval_forces = 40;
-	input_and_expected_countries[1].Country_system_before_war = MONARCHY;
-	input_and_expected_countries[1].Country_system_after_war = MONARCHY;
+	size_t input_and_expected_countries_count = 2;
+	struct country *input_and_expected_countries = malloc(input_and_expected_countries_count * sizeof(struct country));
+	struct country input_country_1 = { "Японія", 1, 50, { 20, 90, 10 }, 1, 0 };
+	struct country input_country_2 = { "СРСР", 0, 20, { 50, 80, 40 }, 1, 1 };
+	input_and_expected_countries[0] = input_country_1;
+	input_and_expected_countries[1] = input_country_2;
 
-	save_countries_to_file(input_and_expected_countries, COUNTRIES_COUNT, PATH_TO_FILE);
+	save_countries_to_file(input_and_expected_countries, input_and_expected_countries_count, PATH_TO_FILE);
 	size_t actual_countries_count = 0;
 	struct country *actual_countries = load_countries_from_file(PATH_TO_FILE, &actual_countries_count);
 
-	ck_assert_int_eq(actual_countries_count, COUNTRIES_COUNT);
+	ck_assert_int_eq(actual_countries_count, input_and_expected_countries_count);
 
-	for (size_t i = 0; i < COUNTRIES_COUNT; i++) {
-		ck_assert_str_eq(input_and_expected_countries[i].name, actual_countries[i].name);
-		ck_assert_int_eq(input_and_expected_countries[i].is_fighting, actual_countries[i].is_fighting);
-		ck_assert_int_eq(input_and_expected_countries[i].area, actual_countries[i].area);
-		ck_assert_int_eq(input_and_expected_countries[i].Combat_power.number_of_infantry,
-				 actual_countries[i].Combat_power.number_of_infantry);
-		ck_assert_int_eq(input_and_expected_countries[i].Combat_power.number_of_air_forces,
-				 actual_countries[i].Combat_power.number_of_air_forces);
-		ck_assert_int_eq(input_and_expected_countries[i].Combat_power.number_of_naval_forces,
-				 actual_countries[i].Combat_power.number_of_naval_forces);
-		ck_assert_int_eq(input_and_expected_countries[i].Country_system_before_war, actual_countries[i].Country_system_before_war);
-		ck_assert_int_eq(input_and_expected_countries[i].Country_system_after_war, actual_countries[i].Country_system_after_war);
+	for (size_t i = 0; i < input_and_expected_countries_count; i++) {
+		assert_countries(input_and_expected_countries[i], actual_countries[i]);
 	}
 }
 END_TEST
