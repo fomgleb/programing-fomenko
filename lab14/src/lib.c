@@ -43,7 +43,6 @@ struct country *load_countries_from_file(const char *path_to_file, size_t *outpu
 	struct country *loading_countries = malloc(*output_countries_count * sizeof(struct country));
 	for (size_t i = 0; i < *output_countries_count; i++) {
 		struct country loading_country = { "", 0, 0, { 0, 0, 0 }, 0, 0 };
-		loading_country.name = malloc(MAX_SIZE_OF_COUNTRY_NAME);
 		int is_fighting = 0;
 		fscanf(loading_file, "%s %d %lf %zu %zu %zu %i %i", loading_country.name, &is_fighting, &loading_country.area,
 		       &loading_country.Combat_power.number_of_infantry, &loading_country.Combat_power.number_of_air_forces,
@@ -84,7 +83,35 @@ void print_countries(struct country *countries, size_t countries_count)
 }
 #pragma endregion
 
-#pragma region Сортування для qsort
+#pragma region Сортування
+void sort_by_criterion(struct country *countries, size_t countries_count, enum criterion sorting_criterion)
+{
+	switch (sorting_criterion) {
+	case IS_FIGHTING:
+		qsort(countries, countries_count, sizeof(struct country), (int (*)(const void *, const void *))sort_by_is_fighting);
+		break;
+	case AREA:
+		qsort(countries, countries_count, sizeof(struct country), (int (*)(const void *, const void *))sort_by_area);
+		break;
+	case NUMBER_OF_INFANTRY:
+		qsort(countries, countries_count, sizeof(struct country), (int (*)(const void *, const void *))sort_by_number_of_infantry);
+		break;
+	case NUMBER_OF_AIR_FORCES:
+		qsort(countries, countries_count, sizeof(struct country), (int (*)(const void *, const void *))sort_by_number_of_air_forces);
+		break;
+	case NUMBER_OF_NAVAL_FORCES:
+		qsort(countries, countries_count, sizeof(struct country), (int (*)(const void *, const void *))sort_by_number_of_neval_forces);
+		break;
+	case COUNTRY_SYSTEM_BEFORE_WAR:
+		qsort(countries, countries_count, sizeof(struct country), (int (*)(const void *, const void *))sort_by_country_system_before_war);
+		break;
+	case COUNTRY_SYSTEM_AFTER_WAR:
+		qsort(countries, countries_count, sizeof(struct country), (int (*)(const void *, const void *))sort_by_country_system_after_war);
+		break;
+	default:
+		break;
+	}
+}
 
 int sort_by_is_fighting(struct country *country1, struct country *country2)
 {
@@ -137,7 +164,7 @@ char *get_country_system_string(enum country_system Country_system)
 	}
 }
 
-char *get_criterio_string(enum criterio Criterio)
+char *get_criterio_string(enum criterion Criterio)
 {
 	switch (Criterio) {
 	case IS_FIGHTING:
@@ -159,5 +186,84 @@ char *get_criterio_string(enum criterio Criterio)
 		exit(1);
 		break;
 	}
+}
+#pragma endregion
+
+#pragma region Пошук
+struct country *find_countries_with_two_different_criteria(struct country *countries, size_t countries_count, enum criterion criterion_1,
+							   enum criterion criterion_2, size_t *output_countries_with_different_criteria_count)
+{
+	struct country *countries_with_different_critera = malloc(countries_count * sizeof(struct country));
+	*output_countries_with_different_criteria_count = 0;
+
+	for (size_t i = 0; i < countries_count; i++) {
+		double criterion_value_1 = 0;
+		switch (criterion_1) {
+		case IS_FIGHTING:
+			criterion_value_1 = countries[i].is_fighting;
+			break;
+		case AREA:
+			criterion_value_1 = countries[i].area;
+			break;
+		case NUMBER_OF_INFANTRY:
+			criterion_value_1 = (double)countries[i].Combat_power.number_of_infantry;
+			break;
+		case NUMBER_OF_AIR_FORCES:
+			criterion_value_1 = (double)countries[i].Combat_power.number_of_air_forces;
+			break;
+		case NUMBER_OF_NAVAL_FORCES:
+			criterion_value_1 = (double)countries[i].Combat_power.number_of_naval_forces;
+			break;
+		case COUNTRY_SYSTEM_BEFORE_WAR:
+			criterion_value_1 = countries[i].Country_system_before_war;
+			break;
+		case COUNTRY_SYSTEM_AFTER_WAR:
+			criterion_value_1 = countries[i].Country_system_after_war;
+			break;
+		default:
+			printf("find switch треба доповнити новими крітеріями.");
+			exit(1);
+			break;
+		}
+
+		double criterion_value_2 = 0;
+		switch (criterion_2) {
+		case IS_FIGHTING:
+			criterion_value_2 = countries[i].is_fighting;
+			break;
+		case AREA:
+			criterion_value_2 = countries[i].area;
+			break;
+		case NUMBER_OF_INFANTRY:
+			criterion_value_2 = (double)countries[i].Combat_power.number_of_infantry;
+			break;
+		case NUMBER_OF_AIR_FORCES:
+			criterion_value_2 = (double)countries[i].Combat_power.number_of_air_forces;
+			break;
+		case NUMBER_OF_NAVAL_FORCES:
+			criterion_value_2 = (double)countries[i].Combat_power.number_of_naval_forces;
+			break;
+		case COUNTRY_SYSTEM_BEFORE_WAR:
+			criterion_value_2 = countries[i].Country_system_before_war;
+			break;
+		case COUNTRY_SYSTEM_AFTER_WAR:
+			criterion_value_2 = countries[i].Country_system_after_war;
+			break;
+		default:
+			printf("find switch треба доповнити новими крітеріями.");
+			exit(1);
+			break;
+		}
+
+		if (criterion_value_1 != criterion_value_2) {
+			countries_with_different_critera[*output_countries_with_different_criteria_count] = countries[i];
+			(*output_countries_with_different_criteria_count)++;
+		}
+	}
+
+	countries_with_different_critera =
+		realloc(countries_with_different_critera, *output_countries_with_different_criteria_count * sizeof(struct country));
+
+	return countries_with_different_critera;
 }
 #pragma endregion

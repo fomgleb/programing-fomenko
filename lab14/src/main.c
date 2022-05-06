@@ -38,7 +38,7 @@
  */
 int main()
 {
-	const char *PATH_TO_COUNTRIES_FILE = "assets/countries.txt";
+	const char *PATH_TO_COUNTRIES_FILE = "assets/output.txt";
 
 	struct country *countries = NULL;
 	size_t countries_count = 0;
@@ -65,12 +65,11 @@ int main()
 		case 'a': {
 			system("clear");
 			struct country new_country = { "", false, 0, { 0, 0, 0 }, 0, 0 };
-			new_country.name = malloc(MAX_SIZE_OF_COUNTRY_NAME);
 			printf("\nДодавання нової країни:\n");
 			printf("Ім'я: ");
 			scanf("%s", new_country.name);
 			printf("Зараз воює (так/ні): ");
-			char *new_country_is_fighting_string = malloc(1000 * sizeof(char));
+			char new_country_is_fighting_string[100];
 			while (true) {
 				scanf("%s", new_country_is_fighting_string);
 				if (strcmp(new_country_is_fighting_string, "так") == 0) {
@@ -145,50 +144,17 @@ int main()
 				printf("\t[%zu] - %s;\n", i, get_criterio_string((unsigned int)i));
 			}
 			printf("Відсортувати за критерієм: ");
-			enum criterio selected_criterio = 0;
+			enum criterion selected_criterio = 0;
 			scanf("%ui", &selected_criterio);
-			switch (selected_criterio) {
-			case IS_FIGHTING:
-				qsort(countries, countries_count, sizeof(struct country), (int (*)(const void *, const void *))sort_by_is_fighting);
-				break;
-			case AREA:
-				qsort(countries, countries_count, sizeof(struct country), (int (*)(const void *, const void *))sort_by_area);
-				break;
-			case NUMBER_OF_INFANTRY:
-				qsort(countries, countries_count, sizeof(struct country),
-				      (int (*)(const void *, const void *))sort_by_number_of_infantry);
-				break;
-			case NUMBER_OF_AIR_FORCES:
-				qsort(countries, countries_count, sizeof(struct country),
-				      (int (*)(const void *, const void *))sort_by_number_of_air_forces);
-				break;
-			case NUMBER_OF_NAVAL_FORCES:
-				qsort(countries, countries_count, sizeof(struct country),
-				      (int (*)(const void *, const void *))sort_by_number_of_neval_forces);
-				break;
-			case COUNTRY_SYSTEM_BEFORE_WAR:
-				qsort(countries, countries_count, sizeof(struct country),
-				      (int (*)(const void *, const void *))sort_by_country_system_before_war);
-				break;
-			case COUNTRY_SYSTEM_AFTER_WAR:
-				qsort(countries, countries_count, sizeof(struct country),
-				      (int (*)(const void *, const void *))sort_by_country_system_after_war);
-				break;
-			default:
-				break;
-			}
+			sort_by_criterion(countries, countries_count, selected_criterio);
 			printf("\nУспішно відсортовано!\n");
 		} break;
 
 		case 'f': {
 			system("clear");
-			struct country *found_countries = malloc(countries_count * sizeof(struct country));
 			size_t found_countries_count = 0;
-			for (size_t i = 0; i < countries_count; i++) {
-				if (countries[i].Country_system_before_war != countries[i].Country_system_after_war) {
-					found_countries[found_countries_count++] = countries[i];
-				}
-			}
+			struct country *found_countries = find_countries_with_two_different_criteria(
+				countries, countries_count, COUNTRY_SYSTEM_BEFORE_WAR, COUNTRY_SYSTEM_AFTER_WAR, &found_countries_count);
 
 			printf("Знайдені країни:\n");
 			print_countries(found_countries, found_countries_count);
@@ -202,6 +168,8 @@ int main()
 			break;
 		}
 	};
+
+	free(countries);
 
 	return 0;
 }

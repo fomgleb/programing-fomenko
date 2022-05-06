@@ -25,7 +25,7 @@ enum country_system { MONARCHY, REPUBLIC, COUNTRY_SYSTEM_MAX };
  * @brief Всі критерії за якими можно провести сортировку
  * 
  */
-enum criterio {
+enum criterion {
 	IS_FIGHTING,
 	AREA,
 	NUMBER_OF_INFANTRY,
@@ -51,7 +51,7 @@ struct combat_power {
  * @brief базовий клас (країна)
  */
 struct country {
-	char *name;
+	char name[MAX_SIZE_OF_COUNTRY_NAME];
 	bool is_fighting;
 	double area;
 	struct combat_power Combat_power;
@@ -96,7 +96,9 @@ void print_all_country_systems();
 void print_countries(struct country *countries, size_t countries_count);
 #pragma endregion
 
-#pragma region Сортування для qsort
+#pragma region Сортування
+void sort_by_criterion(struct country *countries, size_t countries_count, enum criterion sorting_criterion);
+
 int sort_by_is_fighting(struct country *country1, struct country *country2);
 
 int sort_by_area(struct country *country1, struct country *country2);
@@ -125,5 +127,20 @@ char *get_country_system_string(enum country_system Country_system);
  * 
  * @param Criterio - критерій (enum)
  */
-char *get_criterio_string(enum criterio Criterio);
+char *get_criterio_string(enum criterion Criterio);
+#pragma endregion
+
+#pragma region Пошук
+/**
+ * @brief Знайти всі країни в яких відрізнаються два критерія
+ * 
+ * @param countries - країни серед яких буде проводитися пошут
+ * @param countries_count - кількість країн
+ * @param criterion_1 - перший критерій
+ * @param criterion_2 - другий критерій
+ * @param output_countries_with_different_criteria_count - кількість країн із різними крітеріями
+ * 
+ */
+struct country *find_countries_with_two_different_criteria(struct country *countries, size_t countries_count, enum criterion criterion_1,
+							   enum criterion criterion_2, size_t *output_countries_with_different_criteria_count);
 #pragma endregion
