@@ -61,11 +61,7 @@ struct country *load_countries_from_file(const char *path_to_file, size_t *outpu
 #pragma region Додавання та видалення
 struct country *add_country_in_the_end(struct country *countries, size_t *countries_count, struct country new_country)
 {
-	// if (countries == NULL) {
-	// 	countries = malloc(1 * sizeof(struct country));
-	// } else {
 	countries = realloc(countries, (*countries_count + 1) * sizeof(struct country));
-	// }
 	(*countries_count)++;
 	countries[*countries_count - 1] = new_country;
 
